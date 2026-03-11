@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Treenisuunnittelu</title>
+  </head>
+  <body>
+    <h1>Treenisuunnittelu</h1>
+
+    <h2>Viikkosuunnitelmat</h2>
+    {% if weekplans %}
+      <ul>
+        {% for w in weekplans %}
+          <li>
+            {{ w.week_start_date|date:"d.m.Y" }}
+            {% if w.title %} — {{ w.title }}{% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>Ei viikkosuunnitelmia vielä.</p>
+    {% endif %}
+
+    <h2>Viimeisimmät toteumat</h2>
+    {% if logs %}
+      <ul>
+        {% for l in logs %}
+          <li>
+            {{ l.date|date:"d.m.Y" }} — {{ l.get_workout_display }} — {% if l.completed %}Toteutui{% else %}Ei toteutunut{% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>Ei toteumia vielä.</p>
+    {% endif %}
+
+    <p><a href="/admin/">Admin</a></p>
+  </body>
+</html>
